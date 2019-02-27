@@ -1,6 +1,6 @@
 import app from "../app";
 import http from "http";
-import config from "./config";
+import config from "../config";
 
 import { normalizePort } from "./helper";
 var debug = require("debug")("MyBlog:server");

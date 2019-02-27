@@ -1,3 +1,6 @@
+/**
+ * This is Post Model
+ */
 import mongoose from "mongoose";
 
 let Schema: typeof mongoose.Schema = mongoose.Schema;

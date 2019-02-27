@@ -1,10 +1,12 @@
 import { Router } from "express";
 import base from "./base";
-import post from "./post";
+import posts from "./posts";
+import users from "./users";
 
 const routes: { [key: string]: Router } = {
   base,
-  post
+  posts,
+  users
 };
 
 export default routes;
