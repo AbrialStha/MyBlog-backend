@@ -16,8 +16,8 @@ const PostSchema: mongoose.Schema<any> = new Schema({
     default: Date.now
   },
   updated_date: {
-    type: Date,
-    default: null
+    type: [Date],
+    default: []
   },
   status: {
     type: String,
@@ -39,7 +39,7 @@ const PostSchema: mongoose.Schema<any> = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Users"
   },
-  published_date: Date,
+  published_date: [Date],
   //SEO DATA
   url_slug: String,
   seo_title: String,

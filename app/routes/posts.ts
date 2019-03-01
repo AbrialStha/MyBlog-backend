@@ -15,9 +15,16 @@ router.get("/test", (req, res) => res.json({ msg: "Post work" }));
 router.get(
   "/ptest",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => res.json({ msg: "Protected Post work" })
+  (req, res) => res.json({ msg: "Protected Post work", user: req.user.name })
 );
 
-router.get("/create", Post.create);
+//@route    POST api/post/create
+//@desc     Tests protected post route
+//@access   Private
+router.post(
+  "/create",
+  passport.authenticate("jwt", { session: false }),
+  Post.create
+);
 
 export default router;
