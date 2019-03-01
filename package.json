@@ -27,6 +27,7 @@
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "serve-favicon": "^2.5.0",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.3.3333",
@@ -43,6 +44,7 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^11.9.5",
     "@types/passport": "^1.0.0",
+    "@types/passport-jwt": "^3.0.1",
     "@types/serve-favicon": "^2.2.30",
     "@types/validator": "^10.9.0"
   }
