@@ -6,10 +6,11 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import passport from "passport";
 
 import routes from "./routes";
 import config from "./config";
-
+import passportConfig from "./config/passport";
 /**
  * Mongoose COnnection breakdown
  */
@@ -32,6 +33,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
+//Initialize passport
+app.use(passport.initialize());
+//passport Config
+passportConfig(passport);
 
 //Routes
 app.use("/", routes.base);

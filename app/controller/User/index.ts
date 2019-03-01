@@ -65,7 +65,7 @@ class User {
     Users.findOne({ email }).then(user => {
       if (!user) {
         errors.email = "User not found";
-        res.send(400).json(errors);
+        res.status(400).json(errors);
       }
       //Check Password
       bcrypt
