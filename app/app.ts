@@ -39,9 +39,15 @@ app.use(passport.initialize());
 passportConfig(passport);
 
 //Routes
-app.use("/", routes.base);
-app.use("/posts", routes.posts);
-app.use("/users", routes.users);
+let keys: Array<string> = Object.keys(routes);
+let ver: String = '/api/v1/'
+keys.forEach(k => {
+  if (k !== "base")
+    app.use(`${ver}${k}`, routes[k])
+  else
+    app.use(`${ver}`, routes[k])
+
+})
 
 // using arrow syntax
 app.use((req: Request, res: Response, next: NextFunction) => {
