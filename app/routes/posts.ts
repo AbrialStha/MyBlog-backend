@@ -4,12 +4,12 @@ import Post from "../controller/Post";
 
 const router: Router = Router();
 
-//@route    GET api/post/test
+//@route    GET api/posts/test
 //@desc     Tests post route
 //@access   Public
 router.get("/test", (req, res) => res.json({ msg: "Post work" }));
 
-//@route    GET api/post/ptest
+//@route    GET api/posts/ptest
 //@desc     Tests protected post route
 //@access   Private
 router.get(
@@ -18,8 +18,13 @@ router.get(
   (req, res) => res.json({ msg: "Protected Post work", user: req.user.name })
 );
 
-//@route    POST api/post/create
-//@desc     Tests protected post route
+//@route    GET api/posts/
+//@desc     Get Post Created by user
+//@access   Private
+router.get("/", passport.authenticate("jwt", { session: false }), Post.get)
+
+//@route    POST api/posts/create
+//@desc     Create a new post
 //@access   Private
 router.post(
   "/create",

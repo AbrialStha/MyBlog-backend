@@ -42,6 +42,7 @@ class Post {
           seo_title,
           meta_description
         } = req.body;
+        const Author = req.user._id;
         //create mew post
         const newPost = new Posts({
           title,
@@ -52,16 +53,27 @@ class Post {
           tags,
           url_slug,
           seo_title,
-          meta_description
+          meta_description,
+          Author
         });
         //save the new post
         newPost
           .save()
           .then(post => res.json(post))
-          .catch(err => console.log(err));
+          .catch(err => {
+            console.log(err)
+            res.status(500).json('Internal Server Error')
+          });
       }
-    });
+    }).catch(err => res.status(500).json(err));
   };
+
+  get = (req: Request, res: Response, nxt: NextFunction) => {
+    Posts.find({ Author: req.user._id }).then(posts => {
+      if (posts)
+        res.json(posts)
+    })
+  }
 }
 
 export default new Post();

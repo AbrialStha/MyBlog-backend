@@ -29,7 +29,8 @@ const PostSchema: mongoose.Schema<any> = new Schema({
   featured_image: String,
   category: {
     type: Schema.Types.ObjectId,
-    ref: "Categories"
+    ref: "Categories",
+    default: null
   },
   tags: {
     type: [String],

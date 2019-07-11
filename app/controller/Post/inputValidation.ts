@@ -1,12 +1,13 @@
 import validator from "validator";
 import { isEmpty } from "../../utils/helper";
+import { ObjectID } from "bson";
 
 interface create_post {
   title: string;
   description: string;
   summary: string;
   featured_image: string;
-  category: string;
+  category: ObjectID;
   tags: string[];
   url_slug: string;
   seo_title: string;
