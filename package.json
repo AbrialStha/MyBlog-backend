@@ -1,7 +1,7 @@
 {
   "name": "sfwd_backend",
   "version": "1.0.0",
-  "description": "A express project for simple form with decision",
+  "description": "A express and typescript project for simple format with decision (trying to find out why ts), creating a simple blog app",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",

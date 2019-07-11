@@ -2,7 +2,7 @@ import app from "../app";
 import http from "http";
 import config from "../config";
 
-import { normalizePort } from "./helper";
+import { normalizePort } from "../utils/helper";
 var debug = require("debug")("MyBlog:server");
 
 /**
