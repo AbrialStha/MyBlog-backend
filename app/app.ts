@@ -14,7 +14,7 @@ import passportConfig from "./config/passport";
 /**
  * Mongoose COnnection breakdown
  */
-let dbname: string = config.db; //get the mongoose db values from config
+let dbname: string = process.env.db || config.db; //get the mongoose db values from config
 mongoose.connect(dbname, { useNewUrlParser: true }); //connect to the database
 mongoose.Promise = global.Promise; //get mongoose to use the global library
 let db: mongoose.Connection = mongoose.connection; //Get the default connection
