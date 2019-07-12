@@ -69,17 +69,17 @@ The folder strucutre a similar to the express-generator
 ```
 
 ## config
-For now config is used for loading the env, but we can use dotenv like so
+For config i am using dotenv
 ```
 npm install dotenv --save
 ```
 ```
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load();
+  require('dotenv').config();
 }
 ```
 ```
-set NODE_ENV=production tsc && node ./build/bin/WWW.js
+set NODE_ENV=production && tsc && node ./build/bin/WWW.js
 ```
 >  You should not use .env files in your production environment and always set the values directly on the respective host.
 
