@@ -1,13 +1,13 @@
 import { Strategy as jwtStrategy, ExtractJwt } from "passport-jwt";
 import mongoose from "mongoose";
 
-import key from "./index";
 import passport = require("passport");
 
 const Users: mongoose.Model<mongoose.Document, {}> = mongoose.model("Users");
 const opts: any = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.secret || key.secret;
+// console.log('from pass--->', process.env.SECRET)
+opts.secretOrKey = process.env.SECRET;
 
 export default function (passport: any) {
   passport.use(

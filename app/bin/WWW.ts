@@ -1,6 +1,5 @@
 import app from "../app";
 import http from "http";
-import config from "../config";
 
 import { normalizePort } from "../utils/helper";
 var debug = require("debug")("MyBlog:server");
@@ -8,8 +7,7 @@ var debug = require("debug")("MyBlog:server");
 /**
  * Get port from environment and store in Express.
  */
-
-const port: Number = normalizePort(process.env.PORT || config.port_number);
+const port: Number = normalizePort(process.env.PORT);
 app.set("port", port);
 
 /**

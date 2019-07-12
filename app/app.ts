@@ -7,14 +7,23 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import passport from "passport";
+import dotenv from 'dotenv';
+
+/**
+ * Config Env
+ */
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config()
+}
+
 
 import routes from "./routes";
-import config from "./config";
 import passportConfig from "./config/passport";
+
 /**
  * Mongoose COnnection breakdown
  */
-let dbname: string = process.env.db || config.db; //get the mongoose db values from config
+let dbname: any = process.env.DB //get the mongoose db values from config
 mongoose.connect(dbname, { useNewUrlParser: true }); //connect to the database
 mongoose.Promise = global.Promise; //get mongoose to use the global library
 let db: mongoose.Connection = mongoose.connection; //Get the default connection

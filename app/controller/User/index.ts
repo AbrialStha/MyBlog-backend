@@ -2,15 +2,13 @@ import { Request, Response, NextFunction } from "express";
 import gravatar from "gravatar";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import passport from "passport";
-
-import config from "../../config";
 
 //Load User Model
 import Users from "./users";
 
 //Load Input Validation
 import { validateRegisterInput, validateLoginInput } from "./inputValidation";
+import { stringify } from "querystring";
 
 class User {
   /**
@@ -85,7 +83,7 @@ class User {
             //Sign the token
             jwt.sign(
               payload,
-              config.secret,
+              stringify(process.env.SECRET),
               { expiresIn: 3600 },
               (err, token) => {
                 res.json({
