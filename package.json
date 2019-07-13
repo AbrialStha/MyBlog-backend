@@ -6,7 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./app/bin/WWW.ts",
-    "prod": "set NODE_ENV=production && tsc && node ./build/bin/WWW.js"
+    "prod": "set NODE_ENV=production && tsc && node ./build/bin/WWW.js",
+    "serve-debug": "node --inspect ./build/bin/WWW.js"
   },
   "keywords": [
     "express",

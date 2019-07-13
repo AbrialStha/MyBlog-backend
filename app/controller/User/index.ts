@@ -8,7 +8,6 @@ import Users from "./users";
 
 //Load Input Validation
 import { validateRegisterInput, validateLoginInput } from "./inputValidation";
-import { stringify } from "querystring";
 
 class User {
   /**
@@ -83,7 +82,7 @@ class User {
             //Sign the token
             jwt.sign(
               payload,
-              stringify(process.env.SECRET),
+              String(process.env.SECRET),
               { expiresIn: 3600 },
               (err, token) => {
                 res.json({

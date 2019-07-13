@@ -12,7 +12,7 @@ import dotenv from 'dotenv';
 /**
  * Config Env
  */
-if (process.env.NODE_ENV !== 'production') {
+if (String(process.env.NODE_ENV) !== 'production') {
   dotenv.config()
 }
 

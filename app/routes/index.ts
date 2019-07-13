@@ -5,8 +5,8 @@ import users from "./users";
 
 const routes: { [key: string]: Router } = {
   base,
-  posts,
-  users
+  users,
+  posts
 };
 
 export default routes;
