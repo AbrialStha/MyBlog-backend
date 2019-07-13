@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 let Schema: typeof mongoose.Schema = mongoose.Schema;
 
 const CategorySchema: mongoose.Schema<any> = new Schema({
-    title: {
+    name: {
         type: String,
         required: true
     },
