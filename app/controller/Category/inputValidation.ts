@@ -1,6 +1,5 @@
 import validator from 'validator'
 import { isEmpty } from "../../utils/helper";
-import { ObjectID } from "bson";
 
 interface create_cateogry_input {
     name: string

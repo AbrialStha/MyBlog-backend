@@ -30,7 +30,7 @@ class Category {
                     .save()
                     .then(cat => res.json(cat))
                     .catch(err => {
-                        console.log(err)
+                        console.error(err)
                         res.status(500).json('Internal Server Error')
                     });
             }
