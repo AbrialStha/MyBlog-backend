@@ -1,1 +1,1 @@
-web: node ./build/bin/WWW.js
+web: ts-node-dev --respawn --transpileOnly ./app/bin/WWW.ts
