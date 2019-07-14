@@ -1,8 +1,13 @@
-import app from "../App";
+import App from "../app";
 import http from "http";
 
 import { normalizePort } from "../utils/helper";
 var debug = require("debug")("MyBlog:server");
+
+/**
+ * Init app
+ */
+let app = new App().app
 
 /**
  * Get port from environment and store in Express.

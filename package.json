@@ -6,7 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./app/bin/WWW.ts",
-    "start": "set NODE_ENV=production && tsc",
+    "prod": "tsc && node ./build/bin/WWW.js",
+    "start": "set NODE_ENV=production && npm run prod",
     "serve-debug": "node --inspect ./build/bin/WWW.js"
   },
   "keywords": [
