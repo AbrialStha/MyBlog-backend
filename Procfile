@@ -1,1 +1,1 @@
-web: node ./bin/WWW.js
+web: node ./bin/WWW.ts
