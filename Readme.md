@@ -1,6 +1,7 @@
 # Express with TypeScript Implementation
 
 > A experiment for diving in depth with ts and express
+
 Live Demo at [here](https://deltadevblog.herokuapp.com/api/v1/)
 
 ## Running the project
@@ -25,14 +26,16 @@ tsc && node ./build/bin/WWW.js
 ```
 
 ## To Host in Heroku
+
 > Heroku is great for free hosting and not always that easy to host but its for free and thats what it matters
-To host in heroku, make some changes in the file is need.
-* Remove the build file from .gitignore
-* add the typescipt dependencies from dev-dependencies
-* add the engine in package.json (node and npm are enough)
-* also add the Procfile and add the run script from prod in package.json
-* include the start in script
-* add the enviroment vairable in heroku from the dashboard from web (or CLI directly)
+> To host in heroku, make some changes in the file is need.
+
+- Remove the build file from .gitignore
+- add the typescipt dependencies from dev-dependencies
+- add the engine in package.json (node and npm are enough)
+- also add the Procfile and add the run script from prod in package.json
+- include the start in script
+- add the enviroment vairable in heroku from the dashboard from web (or CLI directly)
 
 ## Folder structure
 
@@ -109,7 +112,7 @@ set NODE_ENV=production && tsc && node ./build/bin/WWW.js
 
 ## Routes
 
-The routes are layout is preety simple, it is similar to the routes in express-generator
+The routes are preety simple, it is similar to the routes in express-generator
 
 ```
 import { Router } from "express";
