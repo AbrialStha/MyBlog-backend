@@ -2,7 +2,6 @@
 
 > A experiment for diving in depth with ts and express
 Live Demo at [here](https://deltadevblog.herokuapp.com/api/v1/)
-Hosted in heroku (Heroku is great for free hosting and not always that easy to host but its for free and thats what it matters)
 
 ## Running the project
 
@@ -24,6 +23,16 @@ The prod run will create a build file by using tsc and after that it is similar 
 ```
 tsc && node ./build/bin/WWW.js
 ```
+
+## To Host in Heroku
+> Heroku is great for free hosting and not always that easy to host but its for free and thats what it matters
+To host in heroku, make some changes in the file is need.
+* Remove the build file from .gitignore
+* add the typescipt dependencies from dev-dependencies
+* add the engine in package.json (node and npm are enough)
+* also add the Procfile and add the run script from prod in package.json
+* include the start in script
+* add the enviroment vairable in heroku from the dashboard from web (or CLI directly)
 
 ## Folder structure
 
