@@ -126,7 +126,19 @@ router.get("/", function(req: any, res: any) {
 export default router;
 ```
 
-The only different part is, one doesn't need to go and change the app.ts file for adding sub routes, by using app.use(...), this part is dynamically handle by the code and all you need to do is add your routes name as an object to index.ts routes.
+The only different part is, one doesn't need to go and change the app.ts file for adding sub routes, by using app.use(...), this part is dynamically handle by the code. The dynamic routes code does it for you
+```
+import { Router } from "express";
+
+let routes: { [key: string]: Router } = {}
+require('fs').readdirSync(__dirname + '/').forEach(function (file: string) {
+  var name = file.split('.')[0];
+  if (!name.includes("index"))
+    routes[name] = require(`./${name}`).default
+});
+
+export default routes;
+```
 
 > i.e the posts route will be under `{BASE_URL}/posts` and users route will be under `{BASE_URL}/users`
 
