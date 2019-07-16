@@ -1,18 +1,10 @@
 import { Router } from "express";
-import base from "./base";
-import posts from "./posts";
-import users from "./users";
-import categories from './categories'
-import subscribers from './subscribers'
 
-
-// Note Routes will appear as {Base_URL}/{key}/..
-const routes: { [key: string]: Router } = {
-  base,
-  users,
-  posts,
-  categories,
-  subscribers
-};
+let routes: { [key: string]: Router } = {}
+require('fs').readdirSync(__dirname + '/').forEach(function (file: string) {
+  var name = file.split('.')[0];
+  if (!name.includes("index"))
+    routes[name] = require(`./${name}`).default
+});
 
 export default routes;
