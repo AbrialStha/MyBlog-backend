@@ -6,7 +6,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import passport from "passport";
-import dotenv from 'dotenv';
 
 import routes from './routes'
 
@@ -14,20 +13,11 @@ class App {
     public app: express.Application
 
     constructor() {
-        this.configEnv();
         this.app = express();
         this.connectDb();
         this.initMiddleware();
         this.initRoutes();
         this.initErrorHandle();
-    }
-
-    /**
-    * Config Env
-    */
-    private configEnv() {
-        if (String(process.env.NODE_ENV) !== 'production')
-            dotenv.config()
     }
 
     /**

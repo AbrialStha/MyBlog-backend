@@ -1,8 +1,15 @@
+import dotenv from 'dotenv'
 import App from "../app";
 import http from "http";
 
 import { normalizePort } from "../utils/helper";
 var debug = require("debug")("MyBlog:server");
+
+/**
+* Config Env
+*/
+if (String(process.env.NODE_ENV) !== 'production')
+  dotenv.config()
 
 /**
  * Init app
