@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import Posts from "./posts";
 
 import { validateCreatePostInput } from "./inputValidation";
+import Conflict from "../../Exceptions/Conflict";
+import HttpException from "../../Exceptions/HttpException";
 
 /**
  * Post Controller
@@ -23,13 +25,13 @@ class Post {
   create = (req: Request, res: Response, nxt: NextFunction) => {
     const { errors, isValid } = validateCreatePostInput(req.body);
     if (!isValid) {
-      return res.status(400).json(errors);
+      nxt(new Conflict(errors))
     }
     Posts.findOne({ url_slug: req.body.url_slug }).then(post => {
       if (post) {
         errors.url_slug =
           "Slug already exist!, Enter new unique slug for this post";
-        return res.status(400).json(errors);
+        nxt(new Conflict(errors))
       } else {
         const {
           title,
@@ -62,17 +64,17 @@ class Post {
           .then(post => res.json(post))
           .catch(err => {
             console.log(err)
-            res.status(500).json('Internal Server Error')
+            nxt(new HttpException(err))
           });
       }
-    }).catch(err => res.status(500).json(err));
+    }).catch(err => nxt(new HttpException(err)));
   };
 
   get = (req: Request, res: Response, nxt: NextFunction) => {
     Posts.find({ Author: req.user._id }).then(posts => {
       if (posts)
         res.json(posts)
-    })
+    }).catch(err => nxt(new HttpException(err)))
   }
 }
 

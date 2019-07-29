@@ -8,20 +8,22 @@ import Users from "./users";
 
 //Load Input Validation
 import { validateRegisterInput, validateLoginInput } from "./inputValidation";
+import Conflict from "../../Exceptions/Conflict";
+import HttpException from "../../Exceptions/HttpException";
 
 class User {
   /**
    * Register New User
    */
-  register = (req: Request, res: Response) => {
+  register = (req: Request, res: Response, nxt: NextFunction) => {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
-      return res.status(400).json(errors);
+      nxt(new Conflict(errors))
     }
     Users.findOne({ email: req.body.email }).then(user => {
       if (user) {
         errors.email = "Email already exist";
-        return res.status(400).json(errors);
+        nxt(new Conflict(errors))
       } else {
         const { name, email, password } = req.body;
         let avatar: string = gravatar.url(email, {
@@ -42,7 +44,7 @@ class User {
             newUser
               .save()
               .then(user => res.json(user))
-              .catch(err => console.log(err));
+              .catch(err => nxt(new HttpException(err)));
           });
         });
       }
@@ -52,17 +54,17 @@ class User {
   /**
    * Login by authenticated User
    */
-  login = (req: Request, res: Response) => {
+  login = (req: Request, res: Response, nxt: NextFunction) => {
     let { errors, isValid } = validateLoginInput(req.body);
 
-    if (!isValid) return res.status(400).json(errors);
+    if (!isValid) nxt(new Conflict(errors))
 
     const { email, password } = req.body;
     //Find the User by email
     Users.findOne({ email }).then(user => {
       if (!user) {
         errors.email = "User not found";
-        res.status(400).json(errors);
+        nxt(new Conflict(errors))
       }
       //Check Password
       bcrypt
@@ -92,10 +94,10 @@ class User {
               }
             );
           } else {
-            res.status(400).json({ password: "Password incorrect" });
+            nxt(new Conflict({ password: "Password incorrect" }))
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => nxt(new HttpException(err)));
     });
   };
 }

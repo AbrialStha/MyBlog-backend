@@ -15,7 +15,7 @@ export default function (passport: any) {
       Users.findById(jwt_payload.id)
         .then(user => {
           if (user) return done(null, user);
-          else return done(null, false);
+          else return done(null, false, { status: 401, title: 'Unauthorized', message: 'Invalid user token' });
         })
         .catch(err => console.log(err));
     })

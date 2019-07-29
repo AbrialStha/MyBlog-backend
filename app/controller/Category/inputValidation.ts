@@ -6,7 +6,7 @@ interface create_cateogry_input {
 }
 
 export const validateCreateCategoryInput = (data: create_cateogry_input) => {
-    let errors: { [key: string]: string } = {};
+    let errors: { [key: string]: any } = {};
     data.name = !isEmpty(data.name) ? data.name : "";
     if (validator.isEmpty(data.name)) errors.name = "Name cannot be empty";
     else if (!validator.isLength(data.name, { min: 2 })) {

@@ -2,6 +2,8 @@ import { Request, Response, NextFunction, response } from "express";
 import Categories from './categories'
 
 import { validateCreateCategoryInput } from './inputValidation'
+import Conflict from "../../Exceptions/Conflict";
+import HttpException from "../../Exceptions/HttpException";
 /**
  * Category Controller
  */
@@ -18,7 +20,8 @@ class Category {
             if (category) {
                 errors.name =
                     "Category already exist!";
-                return res.status(400).json(errors);
+                nxt(new Conflict(errors))
+                // return res.status(400).json(errors);
             } else {
                 //create mew category
                 const newCat = new Categories({
@@ -34,7 +37,7 @@ class Category {
                         res.status(500).json('Internal Server Error')
                     });
             }
-        }).catch(err => res.status(500).json(err));
+        }).catch(err => nxt(new HttpException(err)));
     };
 
     /**
@@ -53,15 +56,19 @@ class Category {
     delete = (req: Request, res: Response, nxt: NextFunction) => {
         Categories.findOne({ _id: req.params.id, Author: req.user._id }).then(category => {
             if (!category) {
-                return res.status(400).json({ message: "Category doesn't exist" });
+                nxt(new Conflict({ category: "Category doesn't exist" }))
+                // return res.status(400).json({ message: "Category doesn't exist" });
+            } else {
+                Categories.findByIdAndDelete(req.params.id).then(cat => {
+                    res.json(cat)
+                }).catch(err => {
+                    console.error(err)
+                    nxt(new HttpException(err))
+                })
             }
-
-            Categories.findByIdAndDelete(req.params.id).then(cat => {
-                res.json(cat)
-            }).catch(err => {
-                console.error(err)
-                res.status(500).json("Internal Server Error")
-            })
+        }).catch(err => {
+            console.log('################', err)
+            nxt(new HttpException(err))
         })
     }
 

@@ -83,20 +83,16 @@ class App {
 
         if (this.app.get("env") === "development") {
             this.app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-                res.status(err.status || 500);
-                res.render("error", {
-                    message: err.message,
-                    error: err
-                });
+                let e = err.parse()
+                res.status(e.status || 500);
+                res.json(e);
             });
         }
 
         this.app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-            res.status(err.status || 500);
-            res.render("error", {
-                message: err.message,
-                error: {}
-            });
+            let e = err.parse()
+            res.status(e.status || 500);
+            res.json(e);
         });
     }
 }
